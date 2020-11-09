@@ -40,7 +40,7 @@ export const Header = styled.header`
   }
 
 
-  @media only screen and (max-width: 425px) {
+  @media only screen and (max-width: 550px) {
     .menu-button {
       display: flex;
     }
