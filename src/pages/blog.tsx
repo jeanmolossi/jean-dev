@@ -1,13 +1,25 @@
-import React from 'react';
-import { Layout, SpanMarker } from '@components';
+import { Layout, Blog as BlogPart } from '@components';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import StrapiApi from '@utils/api';
+import { Post } from '@interfaces';
+import { useMemo } from 'react';
 
-const Blog: React.FC = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: posts } = await StrapiApi.get<Post[]>(`${process.env.NEXT_PUBLIC_API_URL}/blog-posts`);
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+const Blog = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { posts } = useMemo(() => props, [props]);
+  
   return (
-    <Layout title="Meu Blog">
-      <div style={{ height: '100vh', display: "flex", alignItems: 'center', justifyContent: 'center', flexDirection: "column" }}>
-        <SpanMarker>Blog em construção</SpanMarker>
-        <h1>Esta página não está pronta</h1>
-      </div>
+    <Layout title="Blog">
+      <BlogPart posts={posts} />
     </Layout>
   );
 }
