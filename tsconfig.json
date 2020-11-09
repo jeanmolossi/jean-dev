@@ -22,7 +22,7 @@
       "@assets/*": ["./assets/*"],
       "@components": ["./components/index"],
       "@components/*": ["./components/*"],
-      "@interfaces/*": ["./interfaces/*"],
+      "@interfaces": ["./interfaces/index"],
       "@utils/*": ["./utils/*"]
     }
   },
